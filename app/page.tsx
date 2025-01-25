@@ -13,22 +13,27 @@ export default function Page() {
       <div className="grid-main grid gap-2">
         <input
           className="placeholder-gray-500 border"
-          placeholder="Physical activity in hours today in total (ex. 2h)"
+          placeholder="Physical activity in hours today in total (ex. 2h or 30min)"
         />
         <br></br>
         <input
           className="placeholder-gray-500 border"
-          placeholder="Sleep in hours last night in total (ex. 8h)"
+          placeholder="Sleep in hours last night in total (ex. 8h or 7h30min)"
         />
         <br></br>
         <input
           className="placeholder-gray-500 border"
-          placeholder="Water intake today in total (ex. 2l)"
+          placeholder="Water intake today in total (ex. 2l or 1.5l)"
         />
         <br></br>
         <input
           className="placeholder-gray-500 border"
-          placeholder="(optional) Calories today in total (ex. 2000kcal)"
+          placeholder="(Optional) Calories today in total (ex. 2000kcal)"
+        />
+        <br></br>
+        <input
+          className="placeholder-gray-500 border"
+          placeholder="(Optional) Did you do any stretching today? If so, how long? (ex. 30min)"
         />
         <br></br>
         <button
