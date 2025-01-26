@@ -10,7 +10,7 @@ export default function ClientPage() {
     the URL, e.g. /search?query=abc */}
 <div className="gap-2">
   <h1 className="text-center font-bold text-2xl">Wellness-tracker</h1>
-  <h3 className="text-center">Hello name, please the data.</h3>
+  <h3 className="text-center">Please the data.</h3>
 </div>
 <div className="grid-main grid gap-2">
   <input

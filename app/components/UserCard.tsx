@@ -39,7 +39,6 @@ export default function Card({ user, pagetype }: Props) {
     <section className="flex flex-col gap-4">
       {greeting}
       {userImage}
-      <p className="text-2xl text-center">{pagetype} Page!</p>
     </section>
   );
 }
