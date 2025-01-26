@@ -1,5 +1,6 @@
 import { getServerSession } from "next-auth";
 import Form from "next/form";
+import { redirect } from 'next/navigation';
 import "react-calendar/dist/Calendar.css";
 import { options } from "./api/auth/[...nextauth]/options";
 
@@ -69,8 +70,8 @@ export default async function Page() {
         </div>
       </div>
     </Form>
-    ): (<h1>Hello! You need to login first!</h1>)}
-    <button className="rounded-full py-2 px-4  bg-violet-500 hover:bg-violet-600 focus:outline-2 focus:outline-offset-2 focus:outline-violet-500 active:bg-violet-700 ..." >Login</button>
+    ): redirect(`/api/auth/signin?callbackUrl=/server`)
+  }
     </>
   );
 }
