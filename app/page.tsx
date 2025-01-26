@@ -70,7 +70,7 @@ export default async function Page() {
         </div>
       </div>
     </Form>
-    ): redirect(`/api/auth/signin?callbackUrl=/server`)
+    ): redirect(`/api/auth/signin?callbackUrl=/client`)
   }
     </>
   );
