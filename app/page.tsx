@@ -17,7 +17,10 @@ export default async function Page() {
         <TrackForm />
         </div>
       ) : (
+        <div>
+        <Navbar />
         <h1 className="text-5xl">Log in!</h1>
+        </div>
       )}
     </>
   );
