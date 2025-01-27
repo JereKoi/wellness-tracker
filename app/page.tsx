@@ -1,5 +1,4 @@
 import { getServerSession } from "next-auth";
-import "react-calendar/dist/Calendar.css";
 import { options } from "./api/auth/[...nextauth]/options";
 import Navbar from "./components/Nav";
 import TrackForm from "./components/TrackForm";

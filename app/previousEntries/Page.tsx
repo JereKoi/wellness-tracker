@@ -3,9 +3,9 @@
 import Calendar from "../components/Calendar";
 
 export default function Page() {
-    return (
-<div className="min-h-screen flex felx-col p-4">
-<Calendar />
-</div>
-    );
-  }
+  return (
+    <div className="min-h-screen flex felx-col p-4">
+      <Calendar />
+    </div>
+  );
+}
