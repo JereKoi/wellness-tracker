@@ -1,6 +1,11 @@
-// Not sure if this page is necessary yet. Would open different
-// page for browsing previous entries.
+//TODO: Figure out tsconfig.json paths for ex. this should
+// be @/components/Calendar
+import Calendar from "../components/Calendar";
 
 export default function Page() {
-    return <h1>Hello Previous entries!</h1>
+    return (
+<div className="min-h-screen flex felx-col p-4">
+<Calendar />
+</div>
+    );
   }
