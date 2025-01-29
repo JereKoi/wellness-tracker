@@ -1,26 +1,16 @@
-import { getServerSession } from "next-auth";
-import { options } from "./api/auth/[...nextauth]/options";
-import Navbar from "./components/Nav";
-import TrackForm from "./components/TrackForm";
-import UserCard from "./components/UserCard";
+import Link from "next/link";
+import LoginForm from "./login/page";
 
-export default async function Page() {
-  const session = await getServerSession(options);
-
+export default function Page() {
   return (
-    <>
-      {session ? (
-        <div>
-          <Navbar />
-        <UserCard user={session?.user} pagetype={"Home"} />
-        <TrackForm />
-        </div>
-      ) : (
-        <div>
-        <Navbar />
-        <h1 className="text-5xl">Log in!</h1>
-        </div>
-      )}
-    </>
+    <div className="flex flex-col justify-center items-center m-4">
+      <h1 className="text-3xl my-3">
+        Welcome! Please sign in to use application.
+      </h1>
+      <LoginForm />
+      <p className="my-3">
+        <Link href="register" className="mx-2 underline">Register</Link>
+      </p>
+    </div>
   );
 }
