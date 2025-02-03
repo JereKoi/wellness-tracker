@@ -2,6 +2,12 @@ import mongoose from "mongoose";
 
 const {MONGODB_URI} = process.env;
 
+if (!MONGODB_URI){
+throw new Error ("Please define MongoDB environment variable.")
+}
+
+
+
 export const connectDB = async () => {
 
     try {
@@ -14,3 +20,5 @@ export const connectDB = async () => {
         return Promise.reject(error);
     }
 };
+
+export default connectDB;
