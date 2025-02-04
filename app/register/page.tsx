@@ -1,4 +1,14 @@
-export default function LoginPage() {
+import { useState } from "react";
+
+const RegisterPage = () => {
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  })
+  const [pending, setPending] = useState(false)
+
   return (
     <>
       <div className="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
@@ -6,6 +16,25 @@ export default function LoginPage() {
           <h5 className="text-xl font-medium text-gray-900 dark:text-white">
             Register to our platform
           </h5>
+          <div>
+            <label
+              htmlFor="name"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              Full name
+            </label>
+            <input
+              type="text"
+              disabled={pending}
+              name="name"
+              id="name"
+              value={form.name}
+              onChange={(e) => setForm({...form, name:e.target.value})}
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+              placeholder="Full Name"
+              required
+            />
+          </div>
           <div>
             <label
               htmlFor="email"
@@ -74,3 +103,5 @@ export default function LoginPage() {
     </>
   );
 }
+
+export default RegisterPage;
