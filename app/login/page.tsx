@@ -1,18 +1,36 @@
 'use client'
 
+import { TriangleAlert } from "lucide-react";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 
-export default function LoginPage() {
+const LoginPage = () => {
 
   const [email, setEmail] = useState<string>("")
   const [password, setPassword] = useState<string>("")
   const [pending, setPending] = useState(false)
-
+  const router = useRouter()
+  const [error, setError] = useState("")
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setPending(true);
+    const res = await signIn("credentials", {
+      redirect: false,
+      email,
+      password
+    })
+    if (res?.ok) {
+      router.push("/")
+      console.log("login successful")
+    } else if (res?.status === 401){
+      setError("Invalid credentials")
+      setPending(false)
+    } else {
+      setError("Something went wrong")
+    }
   }
 
   return (
@@ -22,6 +40,11 @@ export default function LoginPage() {
           <h5 className="text-xl font-medium text-gray-900 dark:text-white">
             Sign in to our platform
           </h5>
+          {!!error && (
+            <div className="bg-destructive/15 p-3 rounded-md flex imtes-center gap-x-2 text-sm text-destructive mb-6"></div>
+          )}
+          <TriangleAlert />
+          <p>{error}</p>
           <div>
             <label
               htmlFor="email"
