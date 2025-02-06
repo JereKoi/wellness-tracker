@@ -1,5 +1,7 @@
-'use client'
+"use client";
 
+import { TriangleAlert } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const RegisterPage = () => {
@@ -8,8 +10,10 @@ const RegisterPage = () => {
     email: "",
     password: "",
     confirmPassword: "",
-  })
-  const [pending, setPending] = useState(false)
+  });
+  const [pending, setPending] = useState(false);
+  const [error, setError] = useState(null);
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -17,17 +21,25 @@ const RegisterPage = () => {
 
     const res = await fetch("/api/auth/register", {
       method: "POST",
-      headers: { "Content-Type": "application/json"},
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form),
     });
-    if (res.ok){
+    const data = await res.json();
+
+    if (res.ok) {
       setPending(false);
-
-      const data = await res.json();
       console.log(data.message);
+      router.push("/login");
+    } else if (res.status === 400) {
+      setError(data.message);
+      setPending(false);
+    } else if (res.status === 500) {
+      setError(data.message);
+      setPending(false);
     }
-  }
+  };
 
+  //TODO: fix !!error styling
   return (
     <>
       <div className="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
@@ -35,6 +47,12 @@ const RegisterPage = () => {
           <h5 className="text-xl font-medium text-gray-900 dark:text-white">
             Register to our platform
           </h5>
+          
+          {!!error && (
+            <div className="bg-destructive/15 p-3 rounded-md flex imtes-center gap-x-2 text-sm text-destructive mb-6"></div>
+          )}
+          <TriangleAlert />
+          <p>{error}</p>
           <div>
             <label
               htmlFor="name"
@@ -48,7 +66,7 @@ const RegisterPage = () => {
               name="name"
               id="name"
               value={form.name}
-              onChange={(e) => setForm({...form, name:e.target.value})}
+              onChange={(e) => setForm({ ...form, name: e.target.value })}
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
               placeholder="Full Name"
               required
@@ -66,7 +84,7 @@ const RegisterPage = () => {
               name="email"
               disabled={pending}
               value={form.email}
-              onChange={(e) => setForm({...form, email:e.target.value})}
+              onChange={(e) => setForm({ ...form, email: e.target.value })}
               id="email"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
               placeholder="name@company.com"
@@ -86,7 +104,7 @@ const RegisterPage = () => {
               disabled={pending}
               id="password"
               value={form.password}
-              onChange={(e) => setForm({...form, password:e.target.value})}
+              onChange={(e) => setForm({ ...form, password: e.target.value })}
               placeholder="••••••••"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
               required
@@ -105,7 +123,9 @@ const RegisterPage = () => {
               disabled={pending}
               id="password"
               value={form.confirmPassword}
-              onChange={(e) => setForm({...form, confirmPassword:e.target.value})}
+              onChange={(e) =>
+                setForm({ ...form, confirmPassword: e.target.value })
+              }
               placeholder="••••••••"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
               required
@@ -131,6 +151,6 @@ const RegisterPage = () => {
       </div>
     </>
   );
-}
+};
 
 export default RegisterPage;
