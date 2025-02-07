@@ -126,10 +126,14 @@ const LoginPage = () => {
               Create account
             </a>
           </div>
+          <div className="bg-slate-300 hover:bg-slate-400 hover:scale-110">
+
+          </div>
         </form>
       </div>
     </>
   );
 }
+//Figure out how to add GitHub and Google auth to last div
 
 export default LoginPage;
